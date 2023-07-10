@@ -1,12 +1,11 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
 
 dotenv.config();
 
 const app: Express = express();
 const port = 8000;
-
-var bodyParser = require('body_parser');
 
 var todos = [
   {id:1, title:'Demo presentation'},
@@ -17,7 +16,7 @@ var todos = [
   {id:6, title:'Dry run'},
   {id:7, title:'Go Live!'}
 ];
-var count = todos.length;
+let count = todos.length;
 
 app.use(bodyParser.json());
 
@@ -25,12 +24,11 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Here are my To Do list Items');
 });
 
-app.post('./', (req: Request, res: Response) => {
-  var newTodo = JSON.parse(req.body);
-  count = count +1;
-  newTodo.id = count;
-  todos.push(newTodo);
-  res.status(201).json();
+app.post('/', (req: Request, res: Response) => {
+  const {todo} = req.body;
+  count++;
+  todos.push({id:count, title: todo});
+  res.status(201).json({todos});
 })
 
 // app.put('./:id', (req: Request, res:Response) => {
@@ -44,13 +42,13 @@ app.post('./', (req: Request, res: Response) => {
 //   }
 // });
 
-app.delete('./:id', (req: Request, res:Response) => {
-  var id = parseInt(req.params.id);
+app.delete('/:id', (req: Request, res:Response) => {
+  const id = parseInt(req.params.id);
   if (todos.filter(todo => todo.id == id).length !== 0){
     todos = todos.filter(todo => todo.id !== id);
-    res.status(200).send();
+    res.status(200).json({todos});
   } else {
-    res.status(404).send('Error');
+    res.status(404).json({error: "todo with id not found"});
   }
 })
 

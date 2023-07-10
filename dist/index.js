@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const body_parser_1 = __importDefault(require("body-parser"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = 8000;
-var bodyParser = require('body_parser');
 var todos = [
     { id: 1, title: 'Demo presentation' },
     { id: 2, title: 'Deal closure' },
@@ -19,7 +19,7 @@ var todos = [
     { id: 7, title: 'Go Live!' }
 ];
 var count = todos.length;
-app.use(bodyParser.json());
+app.use(body_parser_1.default.json());
 app.get('/', (req, res) => {
     res.send('Here are my To Do list Items');
 });
