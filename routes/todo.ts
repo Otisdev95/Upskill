@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response, Router } from 'express';
-import { GetAllTodo, PostTodo, PutTodo, DeleteTodo } from "../controllers/todo"
+import { GetAllTodo, PostTodo, PutTodo, DeleteTodo, } from "../controllers/todo"
 
 const router = express.Router();
 

@@ -8,14 +8,10 @@ dotenv.config();
 const app: Express = express();
 const port = 8000;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
 
 app.use(function (req: Request, res: Response, next: any) {
-  console.log('You are LOGGED IN');
-  next();
-}); 
-
-app.use(function (req: Request, res: Response, next: any) {
+  console.log('You are logged in!');
   console.log(req.url, "Requested at:", Date.now());
   next();
 });

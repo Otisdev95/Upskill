@@ -21,8 +21,6 @@ export const PutTodo = (req: Request, res: Response) => {
     const todoBody = parseInt(req.params.id);
     const {title} = req.body;
     const todo = PutTodoById({title, id:todoBody});
-   // const {todoBody} = req.body;
-   // const todo = PutTodoById(todoBody);
     return res.json(todo);
 }
 
